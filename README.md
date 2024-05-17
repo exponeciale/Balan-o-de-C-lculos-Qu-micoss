@@ -1,3 +1,4 @@
+![balaço](https://github.com/exponeciale/Balanco-de-Calculos-Quimicos/assets/132215795/1256b513-0b6e-4128-956f-59c9745072db)  
 **Descrição**  
 Este projeto consiste em um programa em C para calcular e manipular fórmulas químicas, incluindo a resolução de equações químicas simples. Ele permite aos usuários inserir equações químicas e determinar as quantidades de átomos envolvidos, bem como identificar incógnitas e resolver sistemas de equações lineares resultantes.  
 **Recursos**  
