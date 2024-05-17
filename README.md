@@ -10,7 +10,7 @@ Compile o programa utilizando um compilador C compatível.
 Execute o programa e insera a equação química desejada separando os termos do lado esquerdo e direito com o sinal de igualdade.  
 O programa calculará e exibirá as quantidades de átomos associadas a cada incógnita, bem como resolverá equações químicas simples.  
 **Requisitos**  
-**Compilador C compatível (por exemplo, GCC).**  
+Compilador C compatível (por exemplo, GCC).  
 Ambiente de desenvolvimento C (por exemplo, vim, Visual Studio Code, Code::Blocks).  
 **Contribuição**  
 Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas (issues) ou enviar solicitações de recebimento (pull requests) para melhorias, correções de bugs ou novos recursos.  
