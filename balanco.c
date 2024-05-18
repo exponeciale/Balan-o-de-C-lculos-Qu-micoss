@@ -400,7 +400,7 @@ int main() {
             if (ladoDireito) {
                 termoAtual[j] = '\0'; // Terminando a string atual
                 if (strlen(termoAtual) > 0) {
-                    printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", fabs(penultimateColumn[numTermosDireita+numTermosEsquerda]), termoAtual);
+                    printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s\n", fabs(penultimateColumn[numTermosDireita+numTermosEsquerda]), termoAtual);
                 }
             }
         } else {
@@ -489,7 +489,7 @@ int main() {
 	    // Liberar a memória alocada para a matriz
 	    free(resultadoFormatacao);
         */
-        printf("\n\n\x1b[1m\x1b[33mDeseja continuar (\x1b[0m\x1b[1m\x1b[32msim\x1b[0m/\x1b[1m\x1b[31mfim\x1b[0m\x1b[1m\x1b[33m)?\x1b[0m ");
+        printf("\nx1b[1m\x1b[33mDeseja continuar (\x1b[0m\x1b[1m\x1b[32msim\x1b[0m/\x1b[1m\x1b[31mfim\x1b[0m\x1b[1m\x1b[33m)?\x1b[0m ");
         fgets(continuar, sizeof(continuar), stdin);
         getchar(); // Limpa o buffer do teclado
 
