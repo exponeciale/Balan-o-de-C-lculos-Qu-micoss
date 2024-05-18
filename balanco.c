@@ -476,12 +476,12 @@ int main() {
                 }
             }
         }
-        /*
         // Liberar a memória alocada
         for (int i = 0; i < numAtomos; i++) {
             free(resultadoTabela[i]);
         }
         free(resultadoTabela);
+	/*
         // Liberar a memória alocada para cada linha da matriz
         for (int i = 0; i < numAtomos + 1; i++) {
             free(resultadoFormatacao[i]);
