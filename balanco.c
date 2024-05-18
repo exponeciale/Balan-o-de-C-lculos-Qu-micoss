@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <termios.h>
 
 #define MAX_ATOMOS 118
 #define MAX_TERMOS 50
@@ -295,7 +294,6 @@ void printPenultimateColumn(double column[], int N) {
         printf("%.2f\n", fabs(column[i]));
     }
 }
-
 int main() {
     char entrada[100];
     Associacao tabela[100]; // Array de estruturas Associacao
@@ -368,34 +366,32 @@ int main() {
             }
             // Reescreve a equação e conta os termos novamente usando a entrada original
             // Separando os termos antes e depois da igualdade
-            printf("\x1b[1m\x1b[36mreescrevendo a equação balanceada:\x1b[0m\n");
+            printf("\x1b[1m\x1b[36mReescrevendo a equação balanceada:\x1b[0m\n");
             for (int i = 0; i < comprimento2; i++) {
                 if (entrada_original[i] == '+' || entrada_original[i] == '=') {
                     termoAtual[j] = '\0'; // Terminando a string atual
                     if (strlen(termoAtual) > 0) {
                         if (ladoDireito) {
-                            printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", fabs(penultimateColumn[numTermosDireita]), termoAtual);
+                            printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", fabs(penultimateColumn[numTermosDireita+numTermosEsquerda]), termoAtual);
                             numTermosDireita++;
-                            // Adicionando sinal de '+' se não for o último termo do lado direito
+                            // Adicionando sinal de '+' se não for o último termo do lado    direito
                             if (numTermosDireita < comprimento2 && entrada_original[i] != '\0')
                                 printf(" \x1b[1m\x1b[36m+\x1b[0m ");
-                        }
-                        else {
+                        } else {
                             printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", fabs(penultimateColumn[numTermosEsquerda]), termoAtual);
                             numTermosEsquerda++;
-                            // Adicionando sinal de '+' se não for o último termo do lado esquerdo
+                            // Adicionando sinal de '+' se não for o último termo do lado    esquerdo
                             if (numTermosEsquerda < comprimento2 && entrada_original[i] != '=')
-                                printf(" \x1b[1m\x1b[36m+\x1b[0m ");
+                            printf(" \x1b[1m\x1b[36m+\x1b[0m ");
                             else if (numTermosEsquerda < comprimento2)
-                                printf(" \x1b[1m\x1b[36m=\x1b[0m ");
+                            printf(" \x1b[1m\x1b[36m=\x1b[0m ");
                         }
                         j = 0; // Reiniciando o índice do termo atual
                     }
                     if (entrada_original[i] == '=') {
                         ladoDireito = 1; // Indicando que estamos no lado direito da equação
                     }
-                }
-                else if (entrada_original[i] != ' ') {
+                } else if (entrada_original[i] != ' ') {
                     termoAtual[j] = entrada_original[i];
                     j++;
                 }
@@ -404,11 +400,10 @@ int main() {
             if (ladoDireito) {
                 termoAtual[j] = '\0'; // Terminando a string atual
                 if (strlen(termoAtual) > 0) {
-                    printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", fabs(penultimateColumn[numTermosDireita]), termoAtual);
+                    printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", fabs(penultimateColumn[numTermosDireita+numTermosEsquerda]), termoAtual);
                 }
             }
-        }
-        else {
+        } else {
             // Isolar a última coluna de todas as linhas até que sejam todos inteiros
             int multiplier = 1;
             int allInteger = 0;
@@ -425,11 +420,10 @@ int main() {
                     multiplier++;
                 }
             }
-
             // Multiplica a última coluna pelo multiplicador encontrado
             for (int i = 0; i <= numAtomos; i++) {
                 resultadoFormatacao[i][numTermos] *= multiplier;
-            }
+            }    
             // Armazenar os valores modificados da última coluna
             int comprimento3 = strlen(entrada_original2);
             while (i < comprimento3) {
@@ -442,38 +436,34 @@ int main() {
             }
             double modifiedLastColumn[numAtomos + 1];
             for (int i = 0; i <= numAtomos; i++) {
-                modifiedLastColumn[i] = fabs(resultadoFormatacao[i][numTermos]);
+            	modifiedLastColumn[i] = fabs(resultadoFormatacao[i][numTermos]);
             }
-
             // Reescrever a equação original adicionando os valores modificados da última coluna
             printf("\x1b[1m\x1b[36mReescrevendo a equação balanceada:\x1b[0m\n");
-
             for (int i = 0; i < comprimento3; i++) {
-                if (entrada_original2[i] == '+' || entrada_original2[i] == '=') {
-                    termoAtual[j] = '\0'; // Terminando a string atual
-                    if (strlen(termoAtual) > 0) {
-                        if (ladoDireito) {
-                            printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", modifiedLastColumn[numTermosDireita], termoAtual);
-                            // Adicionando o valor modificado da última coluna ao termo atual
-                            printf(" \x1b[1m\x1b[36m+\x1b[0m ");
-                            numTermosDireita++;
-                        }
-                        else {
+            	if (entrada_original2[i] == '+' || entrada_original2[i] == '=') {
+        	        termoAtual[j] = '\0'; // Terminando a string atual
+   	                 if (strlen(termoAtual) > 0) {
+               	        if (ladoDireito) {
+                            printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s",modifiedLastColumn[numTermosDireita+numTermosEsquerda], termoAtual);
+            	            // Adicionando o valor modificado da última coluna ao termo atual
+            	            printf(" \x1b[1m\x1b[36m+\x1b[0m ");
+                            numTermosDireita++;       
+                	    } else {
                             printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", modifiedLastColumn[numTermosEsquerda], termoAtual);
                             numTermosEsquerda++;
                             // Adicionando sinal de '+' se não for o último termo do lado esquerdo
                             if (numTermosEsquerda < comprimento3 && entrada_original2[i] != '=')
-                                printf(" \x1b[1m\x1b[36m+\x1b[0m ");
+                            printf(" \x1b[1m\x1b[36m+\x1b[0m ");
                             else if (numTermosEsquerda < comprimento3)
-                                printf(" \x1b[1m\x1b[36m=\x1b[0m ");
-                        }
+                            printf(" \x1b[1m\x1b[36m+\x1b[0m ");
+                	    }
                         j = 0; // Reiniciando o índice do termo atual
                     }
                     if (entrada_original2[i] == '=') {
                         ladoDireito = 1; // Indicando que estamos no lado direito da equação
                     }
-                }
-                else if (entrada_original2[i] != ' ') {
+                } else if (entrada_original2[i] != ' ') {
                     termoAtual[j] = entrada_original2[i];
                     j++;
                 }
@@ -482,11 +472,11 @@ int main() {
             if (ladoDireito) {
                 termoAtual[j] = '\0'; // Terminando a string atual
                 if (strlen(termoAtual) > 0) {
-                    printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s", termoAtual, modifiedLastColumn[numTermosDireita]);
+                    printf("\x1b[1m\x1b[36m%.0f\x1b[0m %s\n", termoAtual, modifiedLastColumn[numTermosDireita+numTermosEsquerda]);
                 }
             }
         }
-
+        /*
         // Liberar a memória alocada
         for (int i = 0; i < numAtomos; i++) {
             free(resultadoTabela[i]);
@@ -496,25 +486,25 @@ int main() {
         for (int i = 0; i < numAtomos + 1; i++) {
             free(resultadoFormatacao[i]);
         }
-
-// Liberar a memória alocada para a matriz
-free(resultadoFormatacao);
+	    // Liberar a memória alocada para a matriz
+	    free(resultadoFormatacao);
+        */
         printf("\n\n\x1b[1m\x1b[33mDeseja continuar (\x1b[0m\x1b[1m\x1b[32msim\x1b[0m/\x1b[1m\x1b[31mfim\x1b[0m\x1b[1m\x1b[33m)?\x1b[0m ");
         fgets(continuar, sizeof(continuar), stdin);
         getchar(); // Limpa o buffer do teclado
 
         if (strcmp(continuar, "sim\n") == 0 || strcmp(continuar, "sim") == 0) {
-            // Limpar a tela
-            #ifdef _WIN32
-                system("cls");
-            #else
-                system("clear");
-            #endif
-            resetValores(&numTermosEsquerda, &numTermosDireita, &j, &ladoDireito);
-        }
-    } while (strcmp(continuar, "fim\n") != 0 && strcmp(continuar, "fim") != 0);
-
-    return 0;
+        // Limpar a tela
+        #ifdef _WIN32
+            system("cls");
+        #else
+            system("clear");
+        #endif
+        resetValores(&numTermosEsquerda, &numTermosDireita, &j, &ladoDireito);
+    }
+} 
+while (strcmp(continuar, "fim\n") != 0 && strcmp(continuar, "fim") != 0);
+return 0;
 }
 void resetValores(int *numTermosEsquerda, int *numTermosDireita, int *j, int *ladoDireito) {
     *numTermosEsquerda = 0;
