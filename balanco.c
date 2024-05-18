@@ -456,7 +456,7 @@ int main() {
                             if (numTermosEsquerda < comprimento3 && entrada_original2[i] != '=')
                             printf(" \x1b[1m\x1b[36m+\x1b[0m ");
                             else if (numTermosEsquerda < comprimento3)
-                            printf(" \x1b[1m\x1b[36m+\x1b[0m ");
+                            printf(" \x1b[1m\x1b[36m=\x1b[0m ");
                 	    }
                         j = 0; // Reiniciando o índice do termo atual
                     }
